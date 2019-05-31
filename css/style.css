@@ -1,0 +1,30 @@
+/*RESET*/
+body {
+    font-size: 15px;
+    line-height: 33px;
+    font-family: haptik-light, helvetica, "sans-serif";
+    color: #0f0f0f;
+    letter-spacing: .06em;
+}
+
+a {
+    color: #151515;
+}
+
+ul {
+    list-style-type: none;
+}
+
+/*NAVIGATION*/
+/*.nav-head {*/
+    /*display: flex;*/
+    /*!*flex-direction: row;*!*/
+    /*justify-content: space-between;*/
+/*}*/
+
+/*.nav-item {*/
+    /*display: flex;*/
+    /*!*flex-direction: row;*!*/
+    /*!*justify-content: space-around;*!*/
+    /*!*align-items: flex-start;*!*/
+/*}*/
