@@ -1,13 +1,12 @@
 @import "_reset";
-@font-face {
-    font-family: 'haptik-light';
-    src: url('../../../mini/fonts/GT-Haptik-Light.woff') format('woff')
-}
-$font-stack: haptik-light, helvetica, "sans-serif";
-$primary-color: #333;
-p{
+@import "_base";
+@import "_variables";
+//GRID, FLEXBOX
+//SHADOW
+p {
   color: yellow;
 }
+
 body {
   font: 100% $font-stack;
   color: $primary-color;
@@ -18,4 +17,7 @@ body {
   -ms-transform: $property;
   transform: $property;
 }
-.box { @include transform(rotate(30deg)); }
+
+.box {
+  @include transform(rotate(30deg));
+}
