@@ -23,8 +23,3 @@ body {
   -ms-transform: rotate(30deg);
   transform: rotate(30deg);
 }
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-}
