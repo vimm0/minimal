@@ -1,0 +1,8 @@
+p {
+  color: yellow;
+}
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}

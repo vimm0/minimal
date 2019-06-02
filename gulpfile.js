@@ -1,56 +1,75 @@
-'use strict';
-
-var gulp = require('gulp'),
-    browserSync = require('browser-sync').create(),
-    sass = require('gulp-sass');
-sass.compiler = require('node-sass');
-
-// gulp.task('sass', function () {
-//     return gulp.src('assets/style/sass/**/*.scss')
-//         .pipe(sass.sync().on('error', sass.logError))
-//         .pipe(gulp.dest('assets/style/css'))
-//         .pipe(browserSync.stream());
-// });
+// 'use strict';
 //
-// // gulp.task('sass:watch', function () {
-// //     gulp.watch('assets/style/sass/**/*.scss', gulp.series('sass'));
+// var gulp = require('gulp'),
+//     browserSync = require('browser-sync').create(),
+//     sass = require('gulp-sass');
+// sass.compiler = require('node-sass');
+//
+// // gulp.task('sass', function () {
+// //   return gulp.src('assets/style/sass/**/*.scss')
+// //     .pipe(sass.sync().on('error', sass.logError))
+// //     .pipe(gulp.dest('assets/style/css'));
 // // });
-// gulp.task('serve', gulp.series('sass'), function () {
+// //
+// // gulp.task('sass:watch', function () {
+// //   gulp.watch('assets/style/sass/**/*.scss', gulp.series('sass'));
+// // });
 //
+// gulp.task('styles', function () {
+//
+//     gulp.src('assets/style/sass/**/*.scss')
+//
+//         .pipe(sass({includePaths: ['assets/style/sass']}).on('error', sass.logError))
+//
+//         .pipe(gulp.dest('assets/style/css'))
+//
+//         //-----*****   RELOADING of CSS   *****-----
+//         .pipe(browserSync.reload({ stream: true }))
+// });
+// gulp.task('default', function () {
+//
+//     // Serve files from the root of this project
 //     browserSync.init({
-//         server: {
-//             baseDir: "./",
-//             injectChanges: true // this is new
-//         }
+//         watch: true,
+//         server: "./"
 //     });
 //
-//     gulp.watch('assets/style/sass/**/*.scss', gulp.series('sass'));
-//     gulp.watch("index.html").on('change', browserSync.reload);
+//     gulp.watch('assets/style/sass/**/*.scss', gulp.series('styles', browserSync.reload));
+//
+//     //-----*****   RELOADING of HTML   *****-----
+//     gulp.watch("*.html").on("change", browserSync.reload);
+//
 // });
-// gulp.task('default', gulp.series('serve'));
-gulp.task('styles', function () {
+//
+//
+const gulp = require('gulp');
+const sass = require('gulp-sass');
+const concat = require('gulp-concat-css');
+const browserSync = require('browser-sync').create();
 
-    gulp.src('assets/style/sass/**/*.scss')
+function runSass() {
+  return gulp
+    .src('assets/style/sass/**/*.scss')
+    .pipe(sass())
+    .pipe(concat('index.css'))
+    .pipe(gulp.dest('assets/style/css'))
+    .pipe(browserSync.stream());
+}
 
-        .pipe(sass().on('error', sass.logError))
+function reload() {
+  browserSync.reload();
+}
 
-        .pipe(gulp.dest('assets/style/css'))
+function watch() {
+  browserSync.init({
+    server: {
+      baseDir: './'
+    }
+  });
+  gulp.watch('assets/style/sass/**/*.scss', runSass);
+  gulp.watch('*.html', reload);
+  // gulp.watch('*.js', reload);
+}
 
-        //-----*****   RELOADING of CSS   *****-----
-        .pipe(browserSync.stream());
-});
-gulp.task('default', function () {
-
-    // Serve files from the root of this project
-    browserSync.init({
-        server: "./"
-    });
-
-    gulp.watch('assets/style/sass/**/*.scss', gulp.series('styles'));
-
-    //-----*****   RELOADING of HTML   *****-----
-    gulp.watch("*.html").on("change", browserSync.reload);
-
-});
-
-
+exports.sass = runSass;
+exports.watch = watch;

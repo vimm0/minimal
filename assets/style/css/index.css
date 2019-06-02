@@ -1,8 +1,30 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+@font-face {
+  font-family: 'haptik-light';
+  src: url("../../fonts/GT-Haptik-Light.woff") format("woff");
+}
+
+p {
+  color: yellow;
+}
+
 body {
-  font: 100% Helvetica, sans-serif;
-  color: #333; }
+  font: 100% haptik-light, helvetica, "sans-serif";
+  color: #333;
+}
 
 .box {
   -webkit-transform: rotate(30deg);
   -ms-transform: rotate(30deg);
-  transform: rotate(30deg); }
+  transform: rotate(30deg);
+}
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
